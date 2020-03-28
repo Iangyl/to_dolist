@@ -5,20 +5,12 @@ class ToDoInput extends Component {
     constructor()
     {
         super();
-        this.state = {
-            inputValue: '',
-        }
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    addTask() {
-        this.props.onAddTask(this.props.inputValue);
-        console.log('task: ', this.state.inputValue);
-    }
     handleChange(e){
-        this.setState({
-            inputValue: e.target.value
-        })
+        this.props.onAddTask(e.target.value)
     }
     handleSubmit(e){
         e.preventDefault();
@@ -46,7 +38,7 @@ class ToDoInput extends Component {
                             className='form-control text-capitalize' 
                             placeholder='Add a to do item'
                             id='taskInput'
-                            value={this.props.inputValue}
+                            value={this.props.testStore.item}
                             onChange={this.handleChange}
                         />
                     </div>

@@ -8,15 +8,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   handleDelete = (id) => {
-    const filteredItems = this.state.items.filter(item => item.id !== id);
+    const filteredItems = this.props.testStore.items.filter(item => item.id !== id);
     this.onDeleteTask(filteredItems);
   }
   clearList = () => {
     this.onClearList();
   }
   handleEdit = (id) => {
-    const filteredItems = this.state.items.filter(item => item.id !== id);
-    const selectedItem = this.state.items.find(item => item.id === id);
+    const filteredItems = this.props.testStore.items.filter(item => item.id !== id);
+    const selectedItem = this.props.testStore.items.find(item => item.id === id);
     this.onChangeTask({
       items: filteredItems,
       item: selectedItem.title,
