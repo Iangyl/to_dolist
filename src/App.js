@@ -32,7 +32,7 @@ class App extends Component {
             <h3 className='text-capitalize text-center'>to do input</h3>
             <ToDoInput />
             {console.log(this.props.testStore)}
-            <ToDoList items={this.state.tasksControl.items} clearList={this.clearList} handleDelete={this.handleDelete} handleEdit={this.handleEdit} />
+            <ToDoList items={this.props.testStore.items} clearList={this.clearList} handleDelete={this.handleDelete} handleEdit={this.handleEdit} />
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@ class App extends Component {
 export default connect(
   state => (
     {
-      testStore: state,
+      testStore: state.tasksControl,
     }
   ),
   dispatch => (

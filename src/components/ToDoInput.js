@@ -12,9 +12,8 @@ class ToDoInput extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     addTask() {
-        this.props.onAddTask(this.state.inputValue);
+        this.props.onAddTask(this.props.inputValue);
         console.log('task: ', this.state.inputValue);
-        this.setState({inputValue: ''});
     }
     handleChange(e){
         this.setState({
@@ -25,12 +24,12 @@ class ToDoInput extends Component {
         e.preventDefault();
 
         const newItem = {
-            id: this.state.id,
-            title: this.state.item,
+            id: this.props.testStore.id,
+            title: this.props.testStore.item,
         };
 
-        const updatedItems = [...this.state.items, newItem];
-        this.onUpdatedItems(updatedItems);
+        const updatedItems = [...this.props.testStore.items, newItem];
+        this.props.onUpdatedItems(updatedItems);
     }
     render() {
         return (
@@ -47,12 +46,12 @@ class ToDoInput extends Component {
                             className='form-control text-capitalize' 
                             placeholder='Add a to do item'
                             id='taskInput'
-                            value={this.state.inputValue}
+                            value={this.props.inputValue}
                             onChange={this.handleChange}
                         />
                     </div>
-                    <button type='submit' className={this.state.editItem ? "btn btn-block btn-success mt-3" : "btn btn-block btn-primary mt-3"} >
-                        {this.state.editItem ? "Edit Item" : "Add item"}
+                    <button type='submit' className={this.props.testStore.editItem ? "btn btn-block btn-success mt-3" : "btn btn-block btn-primary mt-3"} >
+                        {this.props.testStore.editItem ? "Edit Item" : "Add item"}
                     </button>
                 </form>
             </div>
@@ -63,7 +62,7 @@ class ToDoInput extends Component {
 export default connect(
     state => (
         {
-            testStore: state,
+            testStore: state.tasksControl,
         }
     ),
     dispatch => (
