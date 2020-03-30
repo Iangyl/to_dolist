@@ -5,7 +5,9 @@ class ToDoInput extends Component {
     constructor()
     {
         super();
-
+        this.state = {
+            itemFromInput: ''
+        }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -15,10 +17,17 @@ class ToDoInput extends Component {
     handleSubmit(e){
         e.preventDefault();
 
+        this.props.onAddTask(this.props.itemFromInput);
+        this.setState({itemFromInput: ''});
+
+        this.props.onUpdateButtonStyle(false);
+
         const newItem = {
             id: this.props.testStore.id,
             title: this.props.testStore.item,
         };
+        console.log(this.inputField.value);
+        this.inputField.value = '';
 
         const updatedItems = [...this.props.testStore.items, newItem];
         this.props.onUpdatedItems(updatedItems);
@@ -38,7 +47,8 @@ class ToDoInput extends Component {
                             className='form-control text-capitalize' 
                             placeholder='Add a to do item'
                             id='taskInput'
-                            value={this.props.testStore.item}
+                            ref={(input) => this.inputField = input}
+                            value={this.props.itemFromInput}
                             onChange={this.handleChange}
                         />
                     </div>
@@ -70,6 +80,12 @@ export default connect(
                     type: 'UPDATE_TASK_LIST',
                     payload: updated
                 })
+           },
+           onUpdateButtonStyle: (button) => {
+               dispatch({
+                   type: 'UPDATE_BUT',
+                   payload: button
+               })
            }
         }
     )

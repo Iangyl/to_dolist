@@ -9,15 +9,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class App extends Component {
   handleDelete = (id) => {
     const filteredItems = this.props.testStore.items.filter(item => item.id !== id);
-    this.onDeleteTask(filteredItems);
+    this.props.onDeleteTask(filteredItems);
   }
   clearList = () => {
-    this.onClearList();
+    this.props.onClearList();
   }
   handleEdit = (id) => {
     const filteredItems = this.props.testStore.items.filter(item => item.id !== id);
     const selectedItem = this.props.testStore.items.find(item => item.id === id);
-    this.onChangeTask({
+    this.props.onChangeTask({
       items: filteredItems,
       item: selectedItem.title,
       editItem: true,
@@ -31,7 +31,6 @@ class App extends Component {
           <div className='col-10 mx-auto col-md-8 mt-4'>
             <h3 className='text-capitalize text-center'>to do input</h3>
             <ToDoInput />
-            {console.log(this.props.testStore)}
             <ToDoList items={this.props.testStore.items} clearList={this.clearList} handleDelete={this.handleDelete} handleEdit={this.handleEdit} />
           </div>
         </div>

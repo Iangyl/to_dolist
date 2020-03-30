@@ -35,5 +35,11 @@ export default function tasksControl(state = initialState, action){
             items: action.payload
         }
     }
+    else if (action.type === 'UPDATE_BUT'){
+        return {
+            ...state,
+            editItem: action.payload
+        }
+    }
     return state;
 }
